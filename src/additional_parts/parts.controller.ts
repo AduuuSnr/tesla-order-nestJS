@@ -1,9 +1,16 @@
-import { Body, Controller, Post, Get, Put, Delete, Param } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Get,
+  Put,
+  Delete,
+  Param,
+} from '@nestjs/common';
 import { CreateAdditionalPartsDto } from './dtos/create-additional-parts.dto';
 import { PartsService } from './parts.service';
 
-
-@Controller("parts")
+@Controller('parts')
 export class PartsController {
   constructor(private readonly partsService: PartsService) {}
 
@@ -11,17 +18,16 @@ export class PartsController {
   create(@Body() dto: CreateAdditionalPartsDto) {
     return this.partsService.create(dto);
   }
-
   @Get()
-  findAll() {
-    return this.partsService.findAll();
+  getAll() {
+    return this.partsService.findAllPartsWithProducts();
   }
   @Put(':id')
-  update(@Param('id') id:number, @Body() dto: CreateAdditionalPartsDto){
-    return this.partsService.update(id, dto)
+  update(@Param('id') id: number, @Body() dto: CreateAdditionalPartsDto) {
+    return this.partsService.update(id, dto);
   }
   @Delete(':id')
-  delete(@Param('id') id:number, @Body() dto: CreateAdditionalPartsDto){
-    return this.partsService.delete(id)
+  delete(@Param('id') id: number, @Body() dto: CreateAdditionalPartsDto) {
+    return this.partsService.delete(id);
   }
 }

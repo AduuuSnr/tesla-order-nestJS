@@ -1,5 +1,6 @@
 import { OrderItem } from 'src/orders/order-item.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
 @Entity({ name: 'products' })
 export class Products {
   @PrimaryGeneratedColumn()
@@ -12,9 +13,11 @@ export class Products {
   max_speed: number;
   @Column()
   min_price: number;
+  @Column({ type: 'double' })
+  acceleration: number;
   @Column()
   image: string;
 
-  @OneToMany(() => OrderItem, (orderItem) => orderItem.product)
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.order)
   orderItems: OrderItem[];
 }

@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Products } from 'src/products/products.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 @Entity({ name: 'parts' })
 export class Parts {
   @PrimaryGeneratedColumn()
@@ -9,6 +16,6 @@ export class Parts {
   part_price: number;
   @Column()
   part_category: string;
-  @Column()
+  @Column({ type: 'text' })
   part_for_vehicle: number;
 }

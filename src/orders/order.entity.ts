@@ -11,7 +11,6 @@ import {
 import { OrderItem } from './order-item.entity';
 import { PaymentStatus } from 'src/commons/enums/payment-status.enum';
 
-
 @Entity('orders')
 export class Order {
   constructor(intialData: Partial<Order> = null) {
@@ -23,11 +22,13 @@ export class Order {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'customer_id', type: 'uuid' })
-  customerId: string;
+  @Column({ name: 'product_name', type: 'varchar' })
+  product_name: string;
 
-  @Column({ name: 'total_amount', type: 'numeric' })
-  totalAmount: number;
+  @Column({ name: 'product_price', type: 'numeric' })
+  product_price: number;
+  @Column({ name: 'total_price', type: 'numeric' })
+  total_price: number;
 
   @Column({
     name: 'payment_status',
@@ -49,6 +50,8 @@ export class Order {
   })
   updatedAt: string;
 
-  @OneToMany(() => OrderItem, (orderItem) => orderItem.order, { cascade: true })
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.order, {
+    cascade: true,
+  })
   orderItems: OrderItem[];
 }

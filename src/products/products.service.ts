@@ -16,21 +16,23 @@ export class ProductService {
     return await this.productsRepository.save(product);
   }
 
-  findAll(){
-    return this.productsRepository.find()
+  findAll() {
+    return this.productsRepository.find();
+  }
+  findProduct(id: number) {
+    return this.productsRepository.findOne({ where: { id } });
   }
 
-  async update(id: number, dto: CreateProductDto){
-    const product = await this.productsRepository.findOne({where: {id}})
-    Object.assign(product,dto);
-    return await this.productsRepository.save(product);    
+  async update(id: number, dto: CreateProductDto) {
+    const product = await this.productsRepository.findOne({ where: { id } });
+    Object.assign(product, dto);
+    return await this.productsRepository.save(product);
   }
-  async delete(id: number){
-    const product = await this.productsRepository.findOne({where: {id}})
-    return await this.productsRepository.remove(product);    
+  async delete(id: number) {
+    const product = await this.productsRepository.findOne({ where: { id } });
+    return await this.productsRepository.remove(product);
   }
   async checkIfProductsExist(id: string[]): Promise<Products[]> {
     return await this.productsRepository.findByIds(id);
   }
-
 }
